@@ -1,0 +1,47 @@
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    double a, b;
+
+    cout << "Введіть два цілі числа: ";
+    cin >> a >> b;
+
+    cout << "Початкові значення: a = " << a
+         << ", b = " << b << endl;
+
+    if (a != b) {
+        double suma = (a + b) / 2.0;
+        double dobutok = 2 * a * b;
+
+        if (a < b) {
+            a = suma;
+            b = dobutok;
+        } else {
+            b = suma;
+            a = dobutok;
+        }
+
+        cout << "Числа не рівні." << endl;
+        cout << "Менше число замінено половиною суми,"
+             << " більше — подвоєним добутком." << endl;
+        cout << "Кінцеві значення: a = " << a
+             << ", b = " << b << endl;
+    } else {
+        cout << "Числа рівні." << endl;
+
+        if (a > 0) {
+            cout << "Натуральний логарифм a = "
+                 << log(a) << endl;
+            cout << "Натуральний логарифм b = "
+                 << log(b) << endl;
+        } else {
+            cout << "Логарифм числа, меншого або рівного нулю,"
+                 << " не існує." << endl;
+        }
+    }
+
+    return 0;
+}
