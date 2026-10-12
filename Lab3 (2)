@@ -1,0 +1,26 @@
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int den;
+
+    cout << "Введіть число від 1 до 7: ";
+    cin >> den;
+
+    switch (den) {
+        case 1: cout << "Понеділок"; break;
+        case 2: cout << "Вівторок"; break;
+        case 3: cout << "Середа"; break;
+        case 4: cout << "Четвер"; break;
+        case 5: cout << "П'ятниця"; break;
+        case 6: cout << "Субота"; break;
+        case 7: cout << "Неділя"; break;
+        default:
+            cout << "Помилка! Введіть число від 1 до 7.";
+    }
+
+    cout << endl;
+
+    return 0;
+}
