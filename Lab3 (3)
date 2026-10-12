@@ -1,0 +1,43 @@
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    double a, b, c, x, F;
+
+    cout << "Введіть значення a, b, c та x: ";
+    cin >> a >> b >> c >> x;
+
+    if (x + 5 < 0 && c == 0) {
+        if (a * x == 0) {
+            cout << "Помилка: ділення на нуль.";
+            return 0;
+        }
+
+        F = 1.0 / (a * x) - b;
+    }
+    else if (x + 5 > 0 && c != 0) {
+        if (x == 0) {
+            cout << "Помилка: ділення на нуль.";
+            return 0;
+        }
+
+        F = (x - a) / x;
+    }
+    else {
+        if (c - 4 == 0) {
+            cout << "Помилка: ділення на нуль.";
+            return 0;
+        }
+
+        F = 10 * x / (c - 4);
+    }
+
+    cout << "a = " << a << endl;
+    cout << "b = " << b << endl;
+    cout << "c = " << c << endl;
+    cout << "x = " << x << endl;
+    cout << "Значення функції F = " << F << endl;
+
+    return 0;
+}
