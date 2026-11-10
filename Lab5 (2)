@@ -1,0 +1,22 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    double a, y = 0;
+    int n;
+
+    cout << "Введіть a: ";
+    cin >> a;
+
+    cout << "Введіть n: ";
+    cin >> n;
+
+    for (int i = 1; i <= n; i++) {
+        y += (i + 2) / pow(a, i);
+    }
+
+    cout << "Результат y = " << y;
+
+    return 0;
+}
