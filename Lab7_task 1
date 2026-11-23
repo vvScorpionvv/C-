@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int rows, cols;
+    cout << "Введіть кількість рядків та стовпців: ";
+    cin >> rows >> cols;
+
+    if (rows <= 0 || cols <= 0) {
+        cout << "Розміри масиву мають бути додатними." << endl;
+        return 0;
+    }
+
+    vector<vector<int>> a(rows, vector<int>(cols));
+    cout << "Введіть елементи масиву (" << rows << "x" << cols << "):\n";
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            cin >> a[i][j];
+        }
+    }
+
+    long long product = 1;
+    bool hasEven = false;
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            if (a[i][j] % 2 == 0) {
+                product *= a[i][j];
+                hasEven = true;
+            }
+        }
+    }
+
+    if (hasEven) {
+        cout << "Добуток усіх парних елементів: " << product << endl;
+    } else {
+        cout << "У масиві немає парних елементів." << endl;
+    }
+
+    return 0;
+}
