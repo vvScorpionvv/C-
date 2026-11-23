@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string>
+#include <set>
+#include <locale>
+
+using namespace std;
+
+int main() {
+    // Налаштування локалі для коректної роботи з кирилицею
+    try {
+        locale::global(locale(""));
+        wcout.imbue(locale());
+        wcin.imbue(locale());
+    } catch (...) {
+        // Якщо системна локаль недоступна, продовжуємо з базовою
+    }
+
+    wstring sentence;
+    wcout << L"Введіть речення: ";
+    getline(wcin, sentence);
+
+    if (sentence.empty()) {
+        wcout << L"Рядок порожній, символи відсутні." << endl;
+        return 0;
+    }
+
+    // Множина зберігає лише унікальні символи у відсортованому порядку
+    set<wchar_t> uniqueChars;
+    for (wchar_t ch : sentence) {
+        uniqueChars.insert(ch);
+    }
+
+    wcout << L"\nСимволи, які зустрічаються у реченні хоча б один раз ("
+          << uniqueChars.size() << L"):\n";
+
+    for (wchar_t ch : uniqueChars) {
+        if (ch == L' ') {
+            wcout << L"[пробіл] ";
+        } else if (ch == L'\t') {
+            wcout << L"[табуляція] ";
+        } else {
+            wcout << L"'" << ch << L"' ";
+        }
+    }
+    wcout << endl;
+
+    return 0;
+}
