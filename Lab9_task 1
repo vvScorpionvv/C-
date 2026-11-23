@@ -1,0 +1,25 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    cout << "Двозначні числа, що задовольняють умову 2*a^2 + b^2 = n: ";
+    bool found = false;
+
+    for (int n = 10; n <= 99; ++n) {
+        int a = n / 10; // перша цифра (десятки)
+        int b = n % 10; // друга цифра (одиниці)
+
+        if (2 * a * a + b * b == n) {
+            cout << n << " ";
+            found = true;
+        }
+    }
+
+    if (!found) {
+        cout << "відсутні";
+    }
+    cout << endl;
+
+    return 0;
+}
