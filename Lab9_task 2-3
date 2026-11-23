@@ -1,0 +1,61 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+    const double step = 0.02;
+    const double eps = 1e-9;
+
+    double minVal = 0.0, maxVal = 0.0;
+    double xMin = 0.0, yMin = 0.0;
+    double xMax = 0.0, yMax = 0.0;
+    bool first = true;
+
+    cout << fixed << setprecision(4);
+    cout << "-----------------------------------------\n";
+    cout << "|     x     |     y     |  f(x, y)      |\n";
+    cout << "-----------------------------------------\n";
+
+    // Відкриті інтервали (0; 0.2) та (1; 1.2) -> старт з 0 + step, кінець < 0.2 - eps
+    for (double x = 0.0 + step; x < 0.2 - eps; x += step) {
+        for (double y = 1.0 + step; y < 1.2 - eps; y += step) {
+            double f = sin(x - y);
+
+            cout << "| " << setw(9) << x
+                 << " | " << setw(9) << y
+                 << " | " << setw(13) << setprecision(6) << f << setprecision(4) << " |\n";
+
+            if (first) {
+                minVal = maxVal = f;
+                xMin = xMax = x;
+                yMin = yMax = y;
+                first = false;
+            } else {
+                if (f < minVal) {
+                    minVal = f;
+                    xMin = x;
+                    yMin = y;
+                }
+                if (f > maxVal) {
+                    maxVal = f;
+                    xMax = x;
+                    yMax = y;
+                }
+            }
+        }
+    }
+    cout << "-----------------------------------------\n\n";
+
+    cout << setprecision(6);
+    cout << "Мінімальне значення f(x, y) = " << minVal
+         << " при x = " << xMin << ", y = " << yMin << endl;
+    cout << "Максимальне значення f(x, y) = " << maxVal
+         << " при x = " << xMax << ", y = " << yMax << endl;
+
+    cout << "\nДобуток значень аргументу x (x_max * x_min): " << (xMax * xMin) << endl;
+    cout << "Добуток значень аргументу y (y_max * y_min): " << (yMax * yMin) << endl;
+
+    return 0;
+}
