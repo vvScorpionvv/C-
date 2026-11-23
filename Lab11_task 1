@@ -1,0 +1,60 @@
+#include <iostream>
+#include <string>
+#include <cwctype>
+#include <locale>
+
+using namespace std;
+
+bool isVowel(wchar_t ch) {
+    wchar_t lower = towlower(ch);
+    // Українські та латинські голосні букви
+    const wstring vowels = L"аеєиіїоуюяaeiouy";
+    return vowels.find(lower) != wstring::npos;
+}
+
+int main() {
+    try {
+        locale::global(locale(""));
+        wcout.imbue(locale());
+        wcin.imbue(locale());
+    } catch (...) {
+        // Якщо локаль недоступна, продовжуємо з базовою
+    }
+
+    wstring line;
+    wcout << L"Введіть рядок: ";
+    getline(wcin, line);
+
+    wstring currentVowels;
+    int foundCount = 0;
+
+    auto flushVowels = [&]() {
+        if (currentVowels.size() >= 4) {
+            wcout << currentVowels << endl;
+            ++foundCount;
+        }
+        currentVowels.clear();
+    };
+
+    for (wchar_t ch : line) {
+        if (ch == L' ') {
+            // Пробіли ігноруємо без розриву послідовності голосних
+            continue;
+        }
+
+        if (isVowel(ch)) {
+            currentVowels.push_back(ch);
+        } else {
+            flushVowels();
+        }
+    }
+
+    // Перевіряємо хвіст рядка після завершення циклу
+    flushVowels();
+
+    if (foundCount == 0) {
+        wcout << L"Послідовностей із 4 і більше голосних літер не знайдено." << endl;
+    }
+
+    return 0;
+}
