@@ -1,0 +1,85 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+
+// Виводить рядок приблизно по центру консолі з кольоровим текстом та фоном
+void printCenteredColored(const string& text, const string& ansiStyle) {
+    const int consoleWidth = 80;
+    const int consoleHeight = 24;
+
+    int padLeft = max(0, (consoleWidth - static_cast<int>(text.size())) / 2);
+    int padTop = consoleHeight / 2;
+
+    cout << "\033[2J\033[H"; // Очищення екрана та переміщення курсора в початок
+    for (int i = 0; i < padTop; ++i) {
+        cout << '\n';
+    }
+    cout << string(padLeft, ' ') << ansiStyle << text << "\033[0m\n";
+    for (int i = 0; i < 4; ++i) {
+        cout << '\n';
+    }
+}
+
+// Підпрограма 1: обчислення добутку чотирьох натуральних чисел
+void solveTask1(const vector<long long>& nums) {
+    long long product = 1;
+    for (long long x : nums) {
+        product *= x;
+    }
+
+    string result = "Задача 1. Добуток чотирьох чисел = " + to_string(product);
+    // Яскраво-жовтий текст на синьому фоні
+    printCenteredColored(result, "\033[1;33;44m");
+}
+
+// Підпрограма 2: обчислення квадрата різниці двох середніх за значенням чисел
+void solveTask2(const vector<long long>& nums) {
+    vector<long long> sortedNums = nums;
+    sort(sortedNums.begin(), sortedNums.end());
+
+    long long mid1 = sortedNums[1];
+    long long mid2 = sortedNums[2];
+    long long diff = mid2 - mid1;
+    long long sqDiff = diff * diff;
+
+    string result = "Задача 2. Квадрат різниці середніх чисел (" +
+                    to_string(mid2) + " - " + to_string(mid1) + ")^2 = " +
+                    to_string(sqDiff);
+    // Білий текст на пурпуровому фоні
+    printCenteredColored(result, "\033[1;37;45m");
+}
+
+int main() {
+    vector<long long> nums(4);
+    cout << "Введіть 4 натуральних числа: ";
+    for (int i = 0; i < 4; ++i) {
+        cin >> nums[i];
+        if (nums[i] <= 0) {
+            cout << "Увага: число має бути натуральним (більшим за 0)." << endl;
+            return 0;
+        }
+    }
+
+    int choice = 0;
+    do {
+        cout << "\n--- МЕНЮ ---\n";
+        cout << "1 - Розв'язати першу задачу (добуток чотирьох чисел)\n";
+        cout << "2 - Розв'язати другу задачу (квадрат різниці двох середніх чисел)\n";
+        cout << "0 - Вихід\n";
+        cout << "Ваш вибір: ";
+        cin >> choice;
+
+        if (choice == 1) {
+            solveTask1(nums);
+        } else if (choice == 2) {
+            solveTask2(nums);
+        } else if (choice != 0) {
+            cout << "Невірний пункт меню. Спробуйте ще раз.\n";
+        }
+    } while (choice != 0);
+
+    return 0;
+}
