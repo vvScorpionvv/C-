@@ -1,0 +1,37 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Введіть кількість елементів масиву: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Кількість елементів має бути додатною." << endl;
+        return 0;
+    }
+
+    vector<double> a(n);
+    cout << "Введіть " << n << " дійсних чисел: ";
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+    }
+
+    if (n < 3) {
+        cout << "У масиві менше 3 елементів — знайти третій елемент неможливо." << endl;
+        return 0;
+    }
+
+    double third = a[2]; // третій елемент (порядковий номер 3)
+    double max_elem = *max_element(a.begin(), a.end());
+    double product = third * max_elem;
+
+    cout << "Третій елемент: " << third << endl;
+    cout << "Максимальний елемент: " << max_elem << endl;
+    cout << "Добуток третього і максимального елементів: " << product << endl;
+
+    return 0;
+}
