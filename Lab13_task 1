@@ -1,0 +1,36 @@
+#include <iostream>
+
+using namespace std;
+
+// Функція для піднесення дійсного числа base до цілого невід'ємного ступеня exp
+double power(double base, int exp) {
+    double result = 1.0;
+    for (int i = 0; i < exp; ++i) {
+        result *= base;
+    }
+    return result;
+}
+
+int main() {
+    double x;
+    int n;
+
+    cout << "Введіть дійсне число x: ";
+    cin >> x;
+    cout << "Введіть натуральне число n: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Число n має бути натуральним (більшим за 0)." << endl;
+        return 0;
+    }
+
+    double sum = 0.0;
+    for (int k = 1; k <= n; ++k) {
+        sum += power(x, 2 * k);
+    }
+
+    cout << "Значення суми x^2 + x^4 + ... + x^(2*" << n << ") = " << sum << endl;
+
+    return 0;
+}
