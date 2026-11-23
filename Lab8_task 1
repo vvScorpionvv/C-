@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int rows, cols;
+    cout << "Введіть кількість рядків та стовпців: ";
+    cin >> rows >> cols;
+
+    if (rows <= 0 || cols <= 0) {
+        cout << "Розміри масиву мають бути додатними." << endl;
+        return 0;
+    }
+
+    vector<vector<int>> a(rows, vector<int>(cols));
+    cout << "Введіть елементи масиву (" << rows << "x" << cols << "):\n";
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            cin >> a[i][j];
+        }
+    }
+
+    long long maxSum = 0;
+    int bestRow = 0;
+
+    for (int i = 0; i < rows; ++i) {
+        long long currentSum = 0;
+        for (int j = 0; j < cols; ++j) {
+            if (a[i][j] < 0 && a[i][j] % 2 != 0) {
+                currentSum += a[i][j];
+            }
+        }
+
+        // Для першого рядка задаємо початковий максимум, далі оновлюємо
+        if (i == 0 || currentSum > maxSum) {
+            maxSum = currentSum;
+            bestRow = i;
+        }
+    }
+
+    cout << "Номер рядка з найбільшою сумою від'ємних непарних елементів: "
+         << (bestRow + 1) << " (сума = " << maxSum << ")" << endl;
+
+    return 0;
+}
